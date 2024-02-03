@@ -11,6 +11,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-permission": "^6.3",
         "vertopal/vertopal-php": "^1.1"
     },

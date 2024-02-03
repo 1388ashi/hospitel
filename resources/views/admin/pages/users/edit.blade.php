@@ -6,6 +6,8 @@
             <p class="card-title font-weight-bolder">ویرایش ادمین</p>
         </div>
         <div class="card-body">
+            <x-alert-danger></x-alert-danger>
+            <x-alert-success></x-alert-success>
             <form action="{{route('admin.users.update',[$admin->id])}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method("put")
@@ -34,6 +36,12 @@
                     <div class="form-group">
                         <label class="font-weight-bold">کلمه عبور</label><span class="text-danger">&starf;</span>
                         <input type="password" name="password" class="form-control"  placeholder="کلمه عبور را اینجا وارد کنید" required>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="font-weight-bold"> تکرار کلمه عبور</label><span class="text-danger">&starf;</span>
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="کلمه عبور را دوباره اینجا وارد کنید" required>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -12,9 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->hasRole('super_admin')) {
-            $users = User::all(); // برای Super Admin ها، تمام کاربران را برمی‌گردانیم
-        }
+        $users = User::where('id' ,'!=', Auth::user()->id)->orderBy('id','desc')->paginate();
         return view('Admin.pages.users.index', ['users' => $users]);
     }
     
@@ -23,7 +22,7 @@ class UserController extends Controller
         $permissions = Permission::all();
         return view('Admin.pages.users.create',['permissions' => $permissions]);
     }
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
@@ -34,6 +33,7 @@ class UserController extends Controller
         ]);
         // اختصاص نقش admin به کاربر
         $user->assignRole('admin');
+
         $permissions = $request->input('permissions');
         if (!empty($permissions)) {
             foreach ($permissions as $permissionId) {
@@ -43,7 +43,11 @@ class UserController extends Controller
                 }
             }
         }
-        return redirect()->route('admin.users.index');
+        $data = [
+            'status' => 'success',
+            'message' => 'ادمین با موفقیت ثبت شد',
+        ];
+        return redirect()->route('admin.users.index')->with($data);
     }
     public function edit($id)
     {
@@ -51,7 +55,7 @@ class UserController extends Controller
         $permission_all = Permission::all();
         return view('Admin.pages.users.edit')->with(compact('admin','permission_all'));
     }
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         // یافتن ادمین بر اساس شناسه
         $admin = User::findOrFail($id);
@@ -65,7 +69,6 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
-            'body' => $request->body,
             'password' => $password,
         ]);
         // مجوزهای جدید انتخاب شده از فرم
@@ -87,7 +90,6 @@ class UserController extends Controller
                 $admin->revokePermissionTo($permission);
             }
         }
-
         // اضافه کردن مجوزهایی که نیاز به اضافه کردن دارند
         foreach ($permissionsToAdd as $permissionId) {
             $permission = Permission::find($permissionId);
@@ -95,14 +97,18 @@ class UserController extends Controller
                 $admin->givePermissionTo($permission);
             }
         }
-
+        $data = [
+            'status' => 'success',
+            'message' => 'ادمین با موفقیت به روزرسانی شد',
+        ];
         // بازگشت به صفحه‌ی مدیریت ادمین‌ها یا یک صفحه دیگر
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with($data);
     }
     public function destroy(Request $request)
     {
         $id = $request->item_id;
-        User::findOrFail($id)->delete();
+        $user =  User::findOrFail($id)->delete();
+        // $user->permissions()->delete();
         $data = [
         'status' => 'success',
         'message' => 'خبر با موفقیت حذف شد',

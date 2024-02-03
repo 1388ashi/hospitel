@@ -14,9 +14,12 @@
                                         <h4 class="card-title">ادمین ها</h4>
                                         
                                         <div class="card-options">
+                                            @can('create users')
                                             <a href="{{route('admin.users.create')}}" class="btn btn-primary mr-30" data-target="#addusers">ثبت کاربر جدید</a>
+                                            @endcan
                                         </div>
                                     </div>
+                                    <x-alert-danger></x-alert-danger>
                                     <x-alert-success></x-alert-success>
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -37,20 +40,23 @@
                                                             <td class="text-center"><span>{{$loop->iteration}}</span></td>
                                                             <td class="text-center "><span>{{$user->name}}</span></td>
                                                             <td class="text-center "><span>{{$user->mobile}}</span></td>
-                                                            <td class="text-center "><span>{{$user->email}}</span></td>
+                                                            <td class="text-center "><span>@if(empty($user->email)){{"ندارد"}}@else{{$user->email}}@endif</span></td>
                                                             @php
                                                             $vertaDate = verta($user->created_at);
                                                             @endphp
                                                             <td class="text-center"><span>{{$vertaDate->format('Y/n/j')}}</span></td>
                                                             <td class="text-center">
                                                                 <div class="d-flex justify-content-center">
+                                                                @can('update users')
                                                                     <a href="{{route('admin.users.edit',[$user->id])}}" class="action-btns1"  data-target="#viewusers">
                                                                         <i class="feather feather-edit text-warning" data-toggle="tooltip" data-placement="top" title="ویرایش"></i>
                                                                     </a>
-                                                                    
-                                                                        <button  class="action-btns1 item-delete"  data-toggle="modal" data-target="#deleteModal" data-title="{{$user->name}}" data-id="{{$user->id}}">
-                                                                            <i class="feather feather-trash-2 text-danger"></i>
-                                                                        </button>
+                                                                @endcan
+                                                                @can('delete users')
+                                                                    <button  class="action-btns1 item-delete"  data-toggle="modal" data-target="#deleteModal" data-title="{{$user->name}}" data-id="{{$user->id}}">
+                                                                        <i class="feather feather-trash-2 text-danger"></i>
+                                                                    </button>
+                                                                @endcan
                                                                 </div>
                                                             </td>
                                                         </tr>

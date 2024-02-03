@@ -28,7 +28,7 @@ return new class extends Migration
             $user = \App\Models\User::query()->create([
                 'name' => 'Super Admin',
                 'label' => 'مدیر کل',
-                'mobile' => '09112702509',
+                'mobile' => '09334496439',
                 'email' => 'admin@admin.com',
                 'password' => bcrypt('123456'),
             ]);

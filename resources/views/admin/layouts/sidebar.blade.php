@@ -32,6 +32,39 @@
 					</ul>
 				</li>
 				@endcan
+				@can('view specialties')
+				<li class="slide">
+					<a class="side-menu__item" data-toggle="slide" >
+						<i class="specialtie sidemenu_icon"></i>
+						<span class="side-menu__label">تخصص ها</span><i class="angle fa fa-angle-left"></i>
+					</a>
+					<ul class="slide-menu">
+						<li><a href="{{route('admin.specialties')}}" class="slide-item">لیست تخصص ها</a></li>
+					</ul>
+				</li>
+				@endcan
+				@can('view role_doctors')
+				<li class="slide">
+					<a class="side-menu__item" data-toggle="slide" >
+						<i class="fa fa-doctors sidemenu_icon"></i>
+						<span class="side-menu__label">نقش دکتر ها</span><i class="angle fa fa-angle-left"></i>
+					</a>
+					<ul class="slide-menu">
+						<li><a href="{{route('admin.roles-doctor')}}" class="slide-item">نقش دکتر ها</a></li>
+					</ul>
+				</li>
+				@endcan
+				@can('view operations')
+				<li class="slide">
+					<a class="side-menu__item" data-toggle="slide" >
+						<i class="fa fa-doctors sidemenu_icon"></i>
+						<span class="side-menu__label">عمل ها</span><i class="angle fa fa-angle-left"></i>
+					</a>
+					<ul class="slide-menu">
+						<li><a href="{{route('admin.operations')}}" class="slide-item">لیست عمل ها</a></li>
+					</ul>
+				</li>
+				@endcan
 
 				{{-- <li class="slide">
 					<a class="side-menu__item" data-toggle="slide"  href="{{route('menus')}}">
