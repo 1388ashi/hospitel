@@ -29,7 +29,7 @@ return new class extends Migration
         $permissionNames = $this->createPermissions($permissions);
 
         //assign permissions to role
-        $this->assignPermissions($permissionNames, 'super_admin');
+        $this->assignPermissions($permissionNames, 'admin');
     }
 
     /**

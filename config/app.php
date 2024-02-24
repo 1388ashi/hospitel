@@ -185,6 +185,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+    'Activity' => Spatie\Activitylog\Models\Activity::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

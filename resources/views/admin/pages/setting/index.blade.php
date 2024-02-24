@@ -28,7 +28,7 @@
                                 <div class="card">
                                     <x-alert-danger></x-alert-danger>
                                     <x-alert-success></x-alert-success>
-                                    <form action="{{route('update-setting',1)}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('admin.update-setting',1)}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
                                         <div class="card-header  border-0">
@@ -52,7 +52,19 @@
                                             </div>
                                             @endforeach
                                             @endif
-                                            
+                                        @if ($type == 'text')
+                                            @foreach ($settings as $setting)
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label for="{{$setting->name}}" class="form-label mb-0 mt-2 mr-5" style="font-size: 18px">{{$setting->label}}</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input name="{{$setting->name}}" type="{{$setting->type}}" id="{{$setting->name}}" value="{{$setting->value}}" class="form-control">
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                             @if ($type == 'file')
                                             @foreach ($settings as $setting)
                                             <div class="form-group">
@@ -78,7 +90,7 @@
                                         </div>
                                         @endforeach    
                                         <div class="card-footer">
-                                            <a  href="{{route('admin-index')}}"  class="btn btn-danger">برگشت</a>
+                                            <a  href="{{route('admin.dashboard')}}"  class="btn btn-danger">برگشت</a>
                                             <button class="btn btn-warning">به روز رسانی</button>
                                         </div>
                                     </form>  
@@ -86,7 +98,7 @@
                             </div>
                             <div class="tab-pane fade  show active" id="tab-5" role="tabpanel">
                                 <div class="card">
-                                <form action="{{route('update-setting',2)}}" method="post" enctype="multipart/form-data">
+                                <form action="{{route('admin.update-setting',2)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('PATCH')
                                     <div class="card-header  border-0">
@@ -108,7 +120,7 @@
                                                     <input type="{{$setting->type}}" id="{{$setting->name}}" min="0"class="form-control" name="{{$setting->name}}" value="{{$setting->value}}">
                                                 </div>
                                         </div>
-                                        @endforeach
+                                            @endforeach
                                         @endif
                                         @if ($type == 'textarea')
                                         @foreach ($settings as $setting)
@@ -123,26 +135,12 @@
                                         </div>
                                         @endforeach
                                         @endif
-                                        @if ($type == 'text')
-                                        @foreach ($settings as $setting)
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label for="{{$setting->name}}" class="form-label mb-0 mt-2 mr-5" style="font-size: 18px">{{$setting->label}}</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input name="{{$setting->name}}" type="{{$setting->type}}" id="{{$setting->name}}" value="{{$setting->value}}" class="form-control">
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        @endif
-                                        
                                         @if ($type == 'file')
                                         @foreach ($settings as $setting)
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <label class="form-label mb-0 mt-2 mr-5" style="font-size: 18px">{{$setting->label}}</label>
+                                                    <label class="form-label mb-0 mt-2" style="font-size: 18px;margin-right:50px">{{$setting->label}}</label>
                                                 </div>
                                                 <div class="col-md-9">
                                                     <div class="input-group file-browser">
@@ -162,7 +160,7 @@
                                     </div>
                                     @endforeach    
                                     <div class="card-footer">
-                                        <a  href="{{route('admin-index')}}"  class="btn btn-danger">برگشت</a>
+                                        <a  href="{{route('admin.dashboard')}}"  class="btn btn-danger">برگشت</a>
                                         <button class="btn btn-warning">به روز رسانی</button>
                                     </div>
                                 </form>  

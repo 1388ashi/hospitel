@@ -51,7 +51,6 @@
                             <label class="mt-2 ml-1 mr-8">{{ $item->label }}</label>
                             <input type="checkbox" name="permissions[]" value="{{ $item->id }}"  {{ $admin->getDirectPermissions()->contains($item) ? 'checked' : '' }}>
                     @endforeach
-                    {{-- @if($item->user->name) @checked(true) @endif --}}
                 </div>
             </div>
             <div class="card-footer text-right mt-1">

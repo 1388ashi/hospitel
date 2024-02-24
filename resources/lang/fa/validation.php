@@ -12,7 +12,9 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
+        'amount' => [
+            'validate_amount' => 'مبلغ وارد شده نمی تواند از مبلغ صورت حساب بیشتر باشد',
+        ],
     "accepted"         => ":attribute باید پذیرفته شده باشد.",
     'accepted_if'      => 'هنگامی که :other، :value است باید با :attribute توافق کنید.',
     "active_url"       => "آدرس :attribute معتبر نیست",
@@ -44,7 +46,7 @@ return [
     'distinct'         => ':attribute مقدار تکراری دارد.',
     "email"            => "فرمت :attribute معتبر نیست.",
     'ends_with'        => ':attribute باید با این مقدار تمام شود: :values.',
-    "exists"           => ":attribute انتخاب شده، معتبر نیست.",
+    // "exists"           => ":attribute انتخاب شده، معتبر نیست.",
     'file' 	       => 'فیلد :attribute باید فایل باشد.',
     "filled"           => "فیلد :attribute الزامی است",
     'gt' => [
@@ -60,7 +62,7 @@ return [
         'array'   => ':attribute باید :value ایتم یا بیشتر را داشته باشد.',
     ],
     "image"            => ":attribute باید تصویر باشد.",
-    "in"               => ":attribute انتخاب شده، معتبر نیست.",
+    "in"               => ": دو نوع بیمه انتخاب نمیشود.",
     "integer"          => ":attribute باید نوع داده ای عددی (integer) باشد.",
     'in_array'         => 'فیلد :attribute در :other موجود نیست.',
     "ip"               => ":attribute باید IP آدرس معتبر باشد.",
@@ -192,7 +194,15 @@ return [
         "linkable_id"=> "زیر مجموعه نوع",
         "link"=> "پیوند",
         "current_password" => "کلمه عبور فعلی",
-        "new_password" => "کلمه عبور جدید"
+        "new_password" => "کلمه عبور جدید",
+        "discount " => "تخفیف",
+        "patient_national_code" => "کد ملی بیمار",
+        "amount" => "مبلغ",
+        "pay_type" => "نوع پرداخت",
+        "cheque" => "چک",
+        "cash" => "نقدی",
+        "recipt" => "عکس پرداخت",
+        "due_date" => "زمان سر رسید",
         
     ],
 ];

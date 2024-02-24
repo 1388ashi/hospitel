@@ -27,6 +27,7 @@
                                                     <tr>
                                                         <th class="border-bottom-0 w-15 text-center">#شناسه</th>
                                                         <th class="border-bottom-0 w-15 text-center">عنوان</th>
+                                                        <th class="border-bottom-0 w-15 text-center">سهم</th>
                                                         <th class="border-bottom-0 w-15 text-center">وضعیت</th>
                                                         <th class="border-bottom-0 w-15 text-center">عملیات</th>
                                                     </tr>
@@ -36,6 +37,7 @@
                                                     <tr>
                                                             <td class="text-center"><span>{{$loop->iteration}}</span></td>
                                                             <td class="text-center"><span>{{$doctor_role->title}}</span></td>
+                                                            <td class="text-center"><span>{{$doctor_role->quota }}</span></td>
                                                             <td class="text-center">@include('includes.status',["status" => $doctor_role->status])</td>
                                                             <td class="text-center">
                                                                 <div class="d-flex justify-content-center">
@@ -111,6 +113,21 @@
                                                     <input type="text" class="form-control" placeholder="عنوان را وارد کنید" name="title" value="{{old('title')}}">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label class="form-label">سهم<span class="text-danger">&starf;</span></label>
+                                                    <input type="text" class="comma form-control" placeholder="سهم را وارد کنید" name="quota" value="{{old('quota')}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label mt-1 ml-5">اجباری: <span class="text-danger">&starf;</span></label>
+                                                        <label class="custom-control custom-radio success ml-4">
+                                                            <input type="radio" class="custom-control-input" name="required" value="1">
+                                                            <span class="custom-control-label">فعال</span>
+                                                        </label>
+                                                        <label class="custom-control custom-radio success ml-4">
+                                                            <input type="radio" class="custom-control-input" name="required" value="0" checked>
+                                                            <span class="custom-control-label">غیر فعال</span>
+                                                        </label>
+                                                </div>
+                                                <div class="form-group">
                                                     <label class="form-label mt-1 ml-5">وضعیت: <span class="text-danger">&starf;</span></label>
                                                         <label class="custom-control custom-radio success ml-4">
                                                             <input type="radio" class="custom-control-input" name="status" value="1" checked>
@@ -149,4 +166,19 @@
     @can('edit role_doctors')
     @include('admin.pages.role-doctors.includes.edit')
     @endcan
+    @endsection
+    @section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('input.comma').on('keyup', function(event) {
+                if(event.which >= 37 && event.which <= 40) return;
+                $(this).val(function(index, value) {
+                    return value
+                        .replace(/\D/g, "")
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                });
+            });
+        
+        });
+    </script>
     @endsection

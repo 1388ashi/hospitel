@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\operations\OperationStoreRequest;
+use App\Http\Requests\operations\OperationUpdateRequest;
 use App\Http\Requests\OperationsRequest;
 use App\Models\Operation;
 use Illuminate\Http\Request;
 
 class OperationsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view role_doctors')->only('index');
+    }
     public function index(){
         $operations = Operation::all(); 
         return view('Admin.pages.operations.index',compact('operations'));
@@ -17,14 +23,8 @@ class OperationsController extends Controller
         $operations = Operation::all(); 
         return view('Admin.pages.operations.index',compact('operations'));
     }
-    public function store(OperationsRequest $request)
+    public function store(OperationStoreRequest $request)
     {
-    // اعتبارسنجی داده‌ها
-    $validatedData = $request->validate([
-        'name' => 'required|unique:operations',
-        'price' => 'required|numeric',
-        'status' => 'required',
-    ]);
     // تبدیل مبلغ به تومان
     // ذخیره داده‌ها در پایگاه داده
     $operation = new Operation;
@@ -40,13 +40,8 @@ class OperationsController extends Controller
     return redirect()->route('admin.operations')->with($data);
 }
 
-public function update(OperationsRequest $request, Operation $operation)
-{
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'status' => 'required',
-        ]);
+    public function update(OperationUpdateRequest $request, Operation $operation)
+    {
 
         $operation->update([
             'name' => $request->name,

@@ -27,7 +27,7 @@
                                                     <tr>
                                                         <th class="border-bottom-0 w-15 text-center">#شناسه</th>
                                                         <th class="border-bottom-0 w-15 text-center">نام</th>
-                                                        <th class="border-bottom-0 w-15 text-center">مبلغ</th>
+                                                        <th class="border-bottom-0 w-15 text-center">مبلغ(تومان)</th>
                                                         <th class="border-bottom-0 w-15 text-center">وضعیت</th>
                                                         <th class="border-bottom-0 w-15 text-center">عملیات</th>
                                                     </tr>
@@ -37,7 +37,7 @@
                                                     <tr>
                                                             <td class="text-center"><span>{{$loop->iteration}}</span></td>
                                                             <td class="text-center"><span>{{$operation->name }}</span></td>
-                                                            <td class="text-center"><span>{{ number_format($operation->price) }} تومان</span></td>
+                                                            <td class="text-center"><span>{{ number_format($operation->price) }}</span></td>
                                                             <td class="text-center">@include('includes.status',["status" => $operation->status])</td>
                                                             <td class="text-center">
                                                                 <div class="d-flex justify-content-center">
@@ -88,8 +88,11 @@
                                                                 </div>
                                                             </div>
                                                             @empty
-                                                                <td class="text-center"> <h4 class="text-danger">داده ای یافت نشد</h4></td>
-                                                        </div>
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="text-danger">هیچ داده ای یافت نشد</span>
+                                                                </td>
+                                                            </tr>
                                                     @endforelse
                                                 </tbody>
                                             </table>
@@ -114,7 +117,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label">مبلغ به تومان<span class="text-danger">&starf;</span></label>
-                                                    <input type="text" class="form-control" placeholder="مبلغ عمل را وارد کنید" name="price" value="{{old('price')}}">
+                                                    <input type="text" class="comma form-control" placeholder="مبلغ عمل را وارد کنید" name="price" value="{{old('price')}}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label mt-1 ml-5">وضعیت: <span class="text-danger">&starf;</span></label>
@@ -155,4 +158,19 @@
     @can('edit operations')
     @include('admin.pages.operations.includes.edit')
     @endcan
+    @endsection
+    @section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('input.comma').on('keyup', function(event) {
+                if(event.which >= 37 && event.which <= 40) return;
+                $(this).val(function(index, value) {
+                    return value
+                        .replace(/\D/g, "")
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                });
+            });
+        
+        });
+    </script>
     @endsection

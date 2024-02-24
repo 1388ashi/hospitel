@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('doctor_roles', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
+            $table->boolean('required')->default(0);
             $table->boolean('status')->default(1);
+            $table->tinyinteger('quota');
             $table->timestamps();
         });
         $permissions = [
@@ -29,7 +31,7 @@ return new class extends Migration
         $permissionNames = $this->createPermissions($permissions);
 
         //assign permissions to role
-        $this->assignPermissions($permissionNames,'super_admin');
+        $this->assignPermissions($permissionNames,'admin');
         
     }
 

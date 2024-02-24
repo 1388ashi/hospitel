@@ -41,6 +41,10 @@ return new class extends Migration
             'name' => 'admin',
             'label' => 'مدیر'
         ]);
+        $doctor = Role::create([
+            'name' => 'doctor',
+            'label' => 'دکتر'
+        ]);
 
         //Assign super_admin role to user
         $user->assignRole($superAdmin);

@@ -19,6 +19,22 @@
                                 <input type="text" name="title" class="form-control" value="{{ $doctor_role->title }}"
                                 required/>
                             </div>
+                            <div class="col form-group">
+                                <label class="font-weight-bold">تخفیف :</label><span class="text-danger">&starf;</span>
+                                <input type="text" name="quota" class="comma form-control" value="{{ $doctor_role->quota }}"
+                                required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label mt-1 ml-5">اجباری: <span class="text-danger">&starf;</span></label>
+                                <label class="custom-control custom-radio success ml-4">
+                                    <input type="radio" class="custom-control-input" name="required" value="1" @if($doctor_role->required == 1) checked @endif>
+                                    <span class="custom-control-label">فعال</span>
+                                </label>
+                                <label class="custom-control custom-radio success ml-4">
+                                    <input type="radio" class="custom-control-input" name="required" value="0" @if($doctor_role->required == 0) checked @endif>
+                                    <span class="custom-control-label">غیر فعال</span>
+                                </label>
                         </div>
                         <div class="form-group">
                             <label class="form-label mt-1 ml-5">

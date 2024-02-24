@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -19,7 +20,8 @@ class UserController extends Controller
     
     public function create()
     {
-        $permissions = Permission::all();
+        $admin = Role::findByName('admin');
+        $permissions = $admin->permissions;
         return view('Admin.pages.users.create',['permissions' => $permissions]);
     }
     public function store(UserRequest $request)

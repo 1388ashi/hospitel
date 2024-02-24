@@ -32,117 +32,100 @@
 					</ul>
 				</li>
 				@endcan
-				@can('view specialties')
 				<li class="slide">
 					<a class="side-menu__item" data-toggle="slide" >
-						<i class="specialtie sidemenu_icon"></i>
-						<span class="side-menu__label">تخصص ها</span><i class="angle fa fa-angle-left"></i>
+						<i class="fa fa-users sidemenu_icon"></i>
+						<span class="side-menu__label">اطلاعات پایه</span><i class="angle fa fa-angle-left"></i>
 					</a>
 					<ul class="slide-menu">
-						<li><a href="{{route('admin.specialties')}}" class="slide-item">لیست تخصص ها</a></li>
-					</ul>
-				</li>
-				@endcan
-				@can('view role_doctors')
-				<li class="slide">
-					<a class="side-menu__item" data-toggle="slide" >
+						@can('view specialties')
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="{{route('admin.specialties')}}">
+								<i class="specialtie sidemenu_icon"></i>
+								<span class="side-menu__label">تخصص ها</span>
+							</a>
+						</li>
+						@endcan
+						@can('view role_doctors')
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="{{route('admin.roles-doctor')}}">
 						<i class="fa fa-doctors sidemenu_icon"></i>
-						<span class="side-menu__label">نقش دکتر ها</span><i class="angle fa fa-angle-left"></i>
+						<span class="side-menu__label">نقش دکتر ها</span>
 					</a>
-					<ul class="slide-menu">
-						<li><a href="{{route('admin.roles-doctor')}}" class="slide-item">نقش دکتر ها</a></li>
-					</ul>
 				</li>
 				@endcan
 				@can('view operations')
 				<li class="slide">
-					<a class="side-menu__item" data-toggle="slide" >
+					<a class="side-menu__item" data-toggle="slide" href="{{route('admin.operations')}}">
 						<i class="fa fa-doctors sidemenu_icon"></i>
-						<span class="side-menu__label">عمل ها</span><i class="angle fa fa-angle-left"></i>
+						<span class="side-menu__label">عمل ها</span>
+					</a>
+				</li>
+				@endcan
+				@can('view insurances')
+				<li class="slide">
+					<a class="side-menu__item" data-toggle="slide" href="{{route('admin.insurances.index')}}">
+						<i class="fa fa-insurances sidemenu_icon"></i>
+						<span class="side-menu__label">بیمه ها</span>
+					</a>
+				</li>
+				@endcan
+			</ul>
+		</li>
+		@can('view doctors')
+		<li class="slide">
+			<a class="side-menu__item" data-toggle="slide">
+				<i class="fa fa-doctors sidemenu_icon"></i>
+						<span class="side-menu__label">دکتر ها</span><i class="angle fa fa-angle-left"></i>
 					</a>
 					<ul class="slide-menu">
-						<li><a href="{{route('admin.operations')}}" class="slide-item">لیست عمل ها</a></li>
+						<li><a href="{{route('admin.doctors.index')}}" class="slide-item">لیست دکتر ها</a></li>
+						<li><a href="{{route('admin.doctors.create')}}" class="slide-item">ثبت دکتر</a></li>
 					</ul>
 				</li>
 				@endcan
-
-				{{-- <li class="slide">
-					<a class="side-menu__item" data-toggle="slide"  href="{{route('menus')}}">
-						<i class="fa fa-get-pocket sidemenu_icon"></i>
-						<span class="side-menu__label">منو ساز</span></i>
-					</a>
-				</li>
-
+				@can('view surguries')
 				<li class="slide">
 					<a class="side-menu__item" data-toggle="slide">
-						<i class="fa fa-newspaper-o sidemenu_icon"></i>
-						<span class="side-menu__label">اخبار</span><i class="angle fa fa-angle-left"></i>
+						<i class="fa fa-doctors sidemenu_icon"></i>
+						<span class="side-menu__label">جراحی ها</span><i class="angle fa fa-angle-left"></i>
 					</a>
 					<ul class="slide-menu">
-						<li><a href="{{route('posts.create')}}" class="slide-item">اخبار جدید</a></li>
-						<li><a href="{{route('posts.index')}}" class="slide-item">اخبار ها</a></li>
+						<li><a href="{{route('admin.surgeries.index')}}" class="slide-item">لیست جراحی ها</a></li>
+						<li><a href="{{route('admin.surgeries.create')}}" class="slide-item">ثبت جراحی</a></li>
 					</ul>
 				</li>
-
+				@endcan
 				<li class="slide">
-					<a class="side-menu__item" data-toggle="slide">
-						<i class="fa fa-bullhorn sidemenu_icon"></i>
-						<span class="side-menu__label">اطلاعیه</span><i class="angle fa fa-angle-left"></i>
+					<a class="side-menu__item" data-toggle="slide"  href="{{route('admin.filter-doctor')}}">
+						<i class="fa fa-insurances sidemenu_icon"></i>
+						<span class="side-menu__label">پرداخت به پزشک</span>
 					</a>
-					<ul class="slide-menu">
-						<li><a href="{{ route('announcements.create') }}" class="slide-item">اطلاعیه جدید</a></li>
-						<li><a href="{{ route('announcements.index') }}" class="slide-item">اطلاعیه ها</a></li>
-					</ul>
 				</li>
-
 				<li class="slide">
-					<a class="side-menu__item" data-toggle="slide"  >
-						<i class="fa fa-book sidemenu_icon"></i>
-						<span class="side-menu__label">آموزش</span><i class="angle fa fa-angle-left"></i>
+					<a class="side-menu__item" data-toggle="slide"  href="{{route('admin.invoice.index')}}">
+						<i class="fa fa-insurances sidemenu_icon"></i>
+						<span class="side-menu__label">لیست صورت حساب ها</span>
 					</a>
-					<ul class="slide-menu">
-						<li><a href="{{ route('articles.create')}}" class="slide-item">آموزش جدید</a></li>
-						<li><a href="{{ route('articles.index')}}" class="slide-item">آموزش ها</a></li>
-					</ul>
 				</li>
-
 				<li class="slide">
-					<a class="side-menu__item" data-toggle="slide" >
-						<i class="fa fa-sliders sidemenu_icon"></i>
-						<span class="side-menu__label">اسلایدر</span><i class="angle fa fa-angle-left"></i>
+					<a class="side-menu__item" data-toggle="slide"  href="{{route('admin.payments.index')}}">
+						<i class="fa fa-insurances sidemenu_icon"></i>
+						<span class="side-menu__label">لیست پرداختی ها</span>
 					</a>
-					<ul class="slide-menu">
-						<li><a href="{{ route('sliders.create')}}" class="slide-item">اسلایدر جدید</a></li>
-						<li><a href="{{ route('sliders.index')}}" class="slide-item">اسلایدر ها</a></li>
-					</ul>
 				</li>
-
+				@can('edit settings')
 				<li class="slide">
-					<a class="side-menu__item" data-toggle="slide" >
-						<i class="fa fa-link sidemenu_icon"></i>
-						<span class="side-menu__label">لينک</span><i class="angle fa fa-angle-left"></i>
-					</a>
-					<ul class="slide-menu">
-						<li><a href="{{ route('links.create')}}" class="slide-item">لينک جدید</a></li>
-						<li><a href="{{ route('links.index')}}" class="slide-item">لينک ها</a></li>
-					</ul>
-				</li>
-			
-				<li class="slide">
-					<a class="side-menu__item" data-toggle="slide" >
-						<i class="sidemenu_icon">#</i>
-						<span class="side-menu__label">برچسب</span><i class="angle fa fa-angle-left"></i>
-					</a>
-					<ul class="slide-menu">
-						<li><a href="{{ route('tags.index')}}" class="slide-item">برچسب ها</a></li>
-					</ul>
-				</li>
-
-				<li class="slide">
-					<a class="side-menu__item" data-toggle="slide"  href="{{ route('edit-setting')}}">
+					<a class="side-menu__item" data-toggle="slide" href="{{route('admin.edit-setting')}}">
 						<i class=" las la-cog sidemenu_icon"></i>
-						<span class="side-menu__label">تنظیمات</span></i>
+						<span class="side-menu__label">تنظیمات</span>
 					</a>
-				</li> --}}
+				</li>
+				@endcan
+				<li class="slide">
+					<a class="side-menu__item" data-toggle="slide" href="{{route('admin.logActivitys')}}">
+						<span class="side-menu__label">فعالیت ادمین ها</span>
+					</a>
+				</li>
 			</ul>
 		</div>

@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(SettingTableSeeder::class);
         // ایجاد نقش "Super Admin" اگر وجود نداشت
         $role = Role::firstOrCreate(['name' => 'super_admin']);
 

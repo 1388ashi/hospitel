@@ -35,7 +35,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($users as $user)
+                                                    @forelse($users as $user)
                                                     <tr>
                                                             <td class="text-center"><span>{{$loop->iteration}}</span></td>
                                                             <td class="text-center "><span>{{$user->name}}</span></td>
@@ -92,9 +92,16 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    @endforeach
+                                                        @empty
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="text-danger">هیچ داده ای یافت نشد</span>
+                                                                </td>
+                                                            </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
+                                            {{$users->onEachSide(1)->links("vendor.pagination.bootstrap-4")}}
                                         </div>
                                     </div>
                                 </div>

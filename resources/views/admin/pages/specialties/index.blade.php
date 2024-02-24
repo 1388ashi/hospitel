@@ -86,8 +86,11 @@
                                                                 </div>
                                                             </div>
                                                             @empty
-                                                                <td class="text-center"> <h4 class="text-danger">داده ای یافت نشد</h4></td>
-                                                        </div>
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="text-danger">هیچ داده ای یافت نشد</span>
+                                                                </td>
+                                                            </tr>
                                                     @endforelse
                                                 </tbody>
                                             </table>

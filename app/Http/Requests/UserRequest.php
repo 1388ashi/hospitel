@@ -13,7 +13,6 @@ class UserRequest extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,7 +22,6 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'mobile' => 'required|unique:users',
             'password' => 'required|max:12|confirmed',
         ];
     }

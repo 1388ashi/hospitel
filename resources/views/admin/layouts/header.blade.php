@@ -120,13 +120,13 @@
 												</span>
 											</a>
 											<div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow animated">
+												<a class="dropdown-item d-flex" href="{{route('admin.edit-setting')}}">
+													<i class="feather feather-settings ml-3 fs-16 my-auto"></i>
+													<div class="mt-1">تنظیمات</div>
+												</a>
 												{{-- <a class="dropdown-item d-flex" href="{{route('admin-profile-edit',[session()->get('user_id')])}}">
 													<i class="feather feather-user ml-3 fs-16 my-auto"></i>
 													<div class="mt-1">پروفایل</div>
-												</a>
-												<a class="dropdown-item d-flex" href="{{route('edit-setting')}}">
-													<i class="feather feather-settings ml-3 fs-16 my-auto"></i>
-													<div class="mt-1">تنظیمات</div>
 												</a>
 												<a class="dropdown-item d-flex" href="#" data-toggle="modal" data-target="#changepasswordnmodal">
 													<i class="feather feather-edit-2 ml-3 fs-16 my-auto"></i>

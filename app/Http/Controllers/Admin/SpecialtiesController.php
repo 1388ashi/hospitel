@@ -10,6 +10,10 @@ use DB;
 
 class SpecialtiesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view role_doctors')->only('index');
+    }
     public function index(){
         $specialties = specialties::all(); 
         return view('Admin.pages.specialties.index',compact('specialties'));
