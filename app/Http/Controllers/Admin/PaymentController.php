@@ -17,7 +17,7 @@ class PaymentController extends Controller
         // $doctorId = request('doctor');
         // $startDate = request('start_date');
         // $endDate = request('end_date');
-        $doctors = Doctor::select('id','name')->get();
+        // $doctors = Doctor::select('id','name')->get();
 
         // $payments = Payment::
         //     when($startDate && $endDate, function(Builder $query) use ($startDate, $endDate) {
@@ -35,15 +35,15 @@ class PaymentController extends Controller
         //     ->with('doctor')
         // ->paginate(15);
         $payments = Payment::with('invoice.doctor:id,name,mobile')
-        ->when($doctors, function ($query) use ($doctors) {
-            return $query->whereHas('invoice.doctor', function ($query) use ($doctors) {
-                $query->where('name', 'like', '%'.$doctors.'%');
-            });
-        })
+        // ->when($doctors, function ($query) use ($doctors) {
+        //     return $query->whereHas('invoice.doctor', function ($query) use ($doctors) {
+        //         $query->where('name', 'like', '%'.$doctors.'%');
+        //     });
+        // })
         ->latest('id')
         ->paginate();
 
-        return view('admin.pages.payments.index', compact('payments','doctors'));
+        return view('admin.pages.payments.index', compact('payments'));
     }
     public function store(paymentStoreRequest $request){
         $inputs = [

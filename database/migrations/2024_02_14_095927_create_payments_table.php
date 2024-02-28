@@ -16,8 +16,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->enum('pay_type',['cash','cheque']);
             $table->bigInteger('amount');
-            $table->string('recipt',100);
+            $table->string('recipt',100)->nullable();
             $table->boolean('status')->default(1);
+            $table->timestamp('notified_at')->nullable();
             $table->timestamp('due_date')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger(column:'invoice_id');

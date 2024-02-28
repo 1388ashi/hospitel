@@ -65,6 +65,8 @@
                             <textarea name="description" cols="87" rows="3">{!! old('description', $payment->description) !!}</textarea>
                         </div>
                     </div>
+                    <div class="row">
+
                         <div class="col form-group">
                             <label>نوع<span class="text-danger">&starf;</span></label>
                             <select class="form-control custom-select select2" data-placeholder="Select Package" name="pay_type">
@@ -75,13 +77,14 @@
                         <div class="col form-group">
                             <label>وضعیت<span class="text-danger">&starf;</span></label>
                             <select class="form-control custom-select select2" data-placeholder="Select Package" name="status">
-                                <option value="1" @selected($payment->status = 1)>موفق</option>
-                                <option value="2" @selected($payment->status = 2)>ناموفق</option>
+                                <option value="1" @selected($payment->status = 1)>فعال</option>
+                                <option value="2" @selected($payment->status = 0)>غیر فعال</option>
                             </select>
                         </div>
-                    <div class="row">
-                        <div class="col d-flex justify-content-center ">
-                            <button type="button" class="btn btn-danger ml-2" data-dismiss="modal">بستن</button>
+                    </div>
+                        <div class="row">
+                            <div class="col d-flex justify-content-center ">
+                                <button type="button" class="btn btn-danger ml-2" data-dismiss="modal">بستن</button>
                             <button type="submit" class="btn btn-warning mr-2">به روزرسانی</button>
                         </div>
                     </div>

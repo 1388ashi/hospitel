@@ -19,12 +19,15 @@ class Payment extends Model
         'recipt',
         'description',
         'due_date',
+        'notified_at',
         'status'
     ];
+
     public function getActivitylogOptions() : LogOptions
     {
         $modelid = $this->attributes['id'];
-        $userid = auth()->user()->id;
+
+        $userid = auth()->check() ? auth()->user()->id : null;
         $description =" پرداخت با شناسه {$modelid} توسط کاربر باشناسه {$userid}";
         return LogOptions::defaults()
         ->logOnly($this->fillable)

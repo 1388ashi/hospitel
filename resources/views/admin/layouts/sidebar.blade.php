@@ -1,12 +1,12 @@
-	
+
 		<div class="app-sidebar3">
 			<div class="app-sidebar__user">
 				<div class="dropdown user-pro-body text-center">
 					<div class="user-pic">
-						<img src="{{asset('images.jfif')}}" alt="user-img" class="avatar-xxl rounded-circle mb-1">
+						<img src="{{Storage::url($logo)}}" alt="user-img" class="avatar-xxl rounded-circle mb-1">
 					</div>
 					<div class="user-info">
-						<h5 class=" mb-2">عرشیا</h5>
+						<h5 class=" mb-2">بیمارستان</h5>
 						<span class="text-muted app-sidebar__user-name text-sm"></span>
 					</div>
 				</div>
@@ -112,6 +112,12 @@
 					<a class="side-menu__item" data-toggle="slide"  href="{{route('admin.payments.index')}}">
 						<i class="fa fa-insurances sidemenu_icon"></i>
 						<span class="side-menu__label">لیست پرداختی ها</span>
+					</a>
+				</li>
+				<li class="slide">
+					<a class="side-menu__item" data-toggle="slide" href="{{route('admin.notify.index')}}">
+						<i class="feather feather-bell sidemenu_icon"></i>
+						<span class="side-menu__label">اعلان ها</span>
 					</a>
 				</li>
 				@can('edit settings')

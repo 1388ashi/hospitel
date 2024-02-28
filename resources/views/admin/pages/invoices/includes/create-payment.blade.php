@@ -79,6 +79,26 @@
 @endforeach
 @section('scripts')
 <script>
+    $('#payment_date_show').MdPersianDateTimePicker({
+        targetDateSelector: '#payment_date',
+        targetTextSelector: '#payment_date_show',
+        englishNumber: false,
+        toDate:true,
+        enableTimePicker: false,
+        dateFormat: 'yyyy-MM-dd',
+        textFormat: 'yyyy-MM-dd',
+        groupId: 'rangeSelector1',
+    });
+    $('#payment_date_show2').MdPersianDateTimePicker({
+        targetDateSelector: '#payment_date2',
+        targetTextSelector: '#payment_date_show2',
+        englishNumber: false,
+        toDate:true,
+        enableTimePicker: false,
+        dateFormat: 'yyyy-MM-dd',
+        textFormat: 'yyyy-MM-dd',
+        groupId: 'rangeSelector1',
+    });
     $('.payment_date_show').MdPersianDateTimePicker({
         targetDateSelector: '.payment_date',
         targetTextSelector: '.payment_date_show',

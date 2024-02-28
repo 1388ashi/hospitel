@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -55,7 +56,10 @@ class Doctor extends Model
         $Onupdate ? $this->doctorRoles()->sync($roleIds) : $this->doctorRoles()->attach($roleIds);
     }
 
-    public function invoice() : BelongsTo{
-        return $this->belongsTo(Invoice::class);
+    public function invoices() : HasMany{
+        return $this->hasMany(Invoice::class);
+	}
+    public function payments() : HasManyThrough{
+        return $this->hasManyThrough(Payment::class,Invoice::class);
 	}
 }

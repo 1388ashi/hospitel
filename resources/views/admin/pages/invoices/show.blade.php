@@ -1,5 +1,123 @@
 @extends('admin.layouts.master')
 @section('content')
+<div class="row mx-5 my-4">
+    <div class="col-md-12">
+        <div class="card overflow-hidden">
+            <div class="card-body">
+                <h2 class="text-muted font-weight-bold">صورت حساب دکتر{{$invoice->doctor->name}}</h2>
+                <div class="">
+                <div class="d-flex" style="justify-content: space-between">
+                    <h4 class=" font-weight-bold">توضیحات</h4>
+                        @php
+                        $vertaDate = verta($invoice->created_at);
+                        @endphp
+                        <ul class="d-md-flex" style="justify-content: left;align-items: flex-start;padding:0px;">
+                            <li class=""  data-placement="top" data-toggle="tooltip" title="تاریخ ایجاد صورت حساب">
+                                <a class="icons" > <i class="feather feather-calendar"></i>{{$vertaDate->format('Y/n/j')}}</a>
+                            </li>
+                        </ul>
+                </div>
+                    <ul class="list-style-disc">
+                        <li>
+                            @if ($invoice->description)
+                            {{$invoice->description}}
+                            @else
+                            توضیحات ندارد
+                            @endif
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="dropdown-divider"></div>
+                <div class="row pt-4">
+                    <div class="col-lg-6 ">
+                        <p class="h5 font-weight-bold">Bill From</p>
+                        <address>
+                            Street Address<br>
+                            State, City<br>
+                            Region, Postal Code<br>
+                            ltd@example.com
+                        </address>
+                    </div>
+                    <div class="col-lg-6 text-left">
+                        <p class="h5 font-weight-bold">Bill To</p>
+                        <address>
+                            Street Address<br>
+                            State, City<br>
+                            Region, Postal Code<br>
+                            ctr@example.com
+                        </address>
+                    </div>
+                </div>
+                <div class="table-responsive push">
+                    <table class="table table-bordered table-hover text-nowrap">
+                        <tr class=" ">
+                            <th class="text-center " style="width: 1%"></th>
+                            <th>Product</th>
+                            <th class="text-center" style="width: 1%">Qnty</th>
+                            <th class="text-left" style="width: 1%">Unit Price</th>
+                            <th class="text-left" style="width: 1%">Amount</th>
+                        </tr>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>
+                                <p class="font-weight-semibold mb-1">Logo Creation</p>
+                                <div class="text-muted">Logo and business cards design</div>
+                            </td>
+                            <td class="text-center">2</td>
+                            <td class="text-left">$60.00</td>
+                            <td class="text-left">$120.00</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">2</td>
+                            <td>
+                                <p class="font-weight-semibold mb-1">Online Store Design &amp; Development</p>
+                                <div class="text-muted">Design/Development for all popular modern browsers</div>
+                            </td>
+                            <td class="text-center">3</td>
+                            <td class="text-left">$80.00</td>
+                            <td class="text-left">$240.00</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">3</td>
+                            <td>
+                                <p class="font-weight-semibold mb-1">App Design</p>
+                                <div class="text-muted">Promotional mobile application</div>
+                            </td>
+                            <td class="text-center">1</td>
+                            <td class="text-left">$40.00</td>
+                            <td class="text-left">$40.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="font-weight-semibold text-left">Subtotal</td>
+                            <td class="text-left">$400.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="font-weight-semibold text-left">Vat Rate</td>
+                            <td class="text-left">20%</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="font-weight-semibold text-left">Vat Due</td>
+                            <td class="text-left">$50.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="font-weight-bold text-uppercase text-left h4 mb-0">Total Due</td>
+                            <td class="font-weight-bold text-left h4 mb-0">$450.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-left">
+                                <button  class="btn btn-primary" onClick="javascript:window.print();"><i class="si si-wallet"></i> Pay Invoice</button>
+                                <button  class="btn btn-secondary" onClick="javascript:window.print();"><i class="si si-paper-plane"></i> Send Invoice</button>
+                                <button  class="btn btn-info" onClick="javascript:window.print();"><i class="si si-printer"></i> Print Invoice</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="text-muted text-center">Thank you very much for doing business with us. We look forward to working with you again!</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="app-content main-content" style="margin-right:0px;margin-top:0px;align-items: center;justify-content: center;">
     <div class="side-app">
         
@@ -55,13 +173,13 @@
                         <h3 class="font-weight-semibold">اطلاعات پرداختی :  </h3>
                             <div class="table-responsive">
                                 <ul class="list-group">
-                                    @foreach ($invoice->paymentS as $item)
+                                    @foreach ($invoice->payments as $item)
                                     <li class="list-group-item d-flex" style="justify-content: space-between">
                                 @php
                                 $vertaDate = verta($item->due_date);
                                 @endphp
                                         <p>
-                                            مبلغ پرداختی: {{$item->amount}}
+                                            مبلغ پرداختی: {{number_format($item->amount)}}
                                         </p>
                                         <p>
                                             تاریخ پرداختی: {{$vertaDate->format('Y/n/j')}}

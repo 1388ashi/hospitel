@@ -112,7 +112,14 @@
 												<i class="feather feather-minimize fullscreen-button exit-fullscreen header-icons"></i>
 											</a>
 										</div>
-						
+										<div class="dropdown header-notify">
+											<a class="nav-link icon" data-toggle="sidebar-right" data-target=".sidebar-right">
+												<i class="feather feather-bell header-icon"></i>
+												@if($notifications->where('viewed_at', null)->isNotEmpty())
+													<span class="bg-dot"></span>
+												@endif
+											</a>
+										</div>
 										<div class="dropdown profile-dropdown">
 											<a href="#" class="nav-link pr-1 pl-0 leading-none" data-toggle="dropdown">
 												<span>
@@ -145,75 +152,38 @@
 								</div>
 							</div>
 						</div> 
-						{{-- <div class="modal fade"  id="changepasswordnmodal">
-							<div class="modal-dialog" role="document">
-								<form action="{{route('change-password',[session()->get('user_id')])}}" method="post">
-									@csrf
-									@method('Put')
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title">تغییر رمز عبور</h5>
-											<button  class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											@if(request()->is('post/create') && $errors->any()) 
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-										
-										@elseif(request()->is('post/edit') && $errors->any())
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-										
-										@elseif(request()->is('article/create') && $errors->any())
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-										
-										@elseif(request()->is('article/edit') && $errors->any())
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-										
-										@elseif(request()->is('slider/create') && $errors->any())
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-
-										@elseif(request()->is('slider/edit') && $errors->any())
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-
-										@elseif(request()->is('announcements/create') && $errors->any())
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-										@elseif(request()->is('announcements/edit') && $errors->any())
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-										@elseif(request()->is('profile/edit') && $errors->any())
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-										@else
-										<x-alert-danger></x-alert-danger>
-										<x-alert-success></x-alert-success>
-										@endif
-										<div class="form-group">
-											<label class="form-label">کلمه عبور قدیمی</label>
-											<input type="password" class="form-control" placeholder="current password" name="current_password">
-										</div>
-										<div class="form-group">
-											<label class="form-label">کلمه عبور  جدید</label>
-											<input type="password" class="form-control" placeholder="new password" name="new_password">
-										</div>
-										<div class="form-group">
-											<label class="form-label">تایید کلمه عبور </label>
-											<input type="password" class="form-control" placeholder="confirm password" name="new_password_confirmation">
-										</div>
-									</div>
-									<div class="modal-footer text-right">
-										<a  class="btn btn-outline-primary" data-dismiss="modal">برگشت</a>
-										<button  class="btn btn-warning text-right">به روز رسانی</button>
-									</div>
+						<div class="sidebar sidebar-right sidebar-animate">
+							<div class="card-header border-bottom pb-5">
+								<h4 class="card-title">اعلان ها</h4>
+								<div class="card-options">
+									<a href="#" class="btn btn-sm btn-icon btn-light text-primary"  data-toggle="sidebar-right" data-target=".sidebar-right"><i class="feather feather-x"></i> </a>
 								</div>
-								</form>
 							</div>
-						</div> --}}
-
+							<div class="">
+								@foreach ($notifications as $notify)
+									@if($notify->viewed_at === null)
+									<div class="list-group-item  align-items-center border-0">
+										<div class="d-flex">
+											<div class="mt-1">
+												<a href="{{route('admin.notify.show',$notify->id)}}" class="font-weight-semibold fs-16"> {{$notify->title}} <span class="text-muted font-weight-normal"> {{Str::limit($notify->body,17,'')}} </span></a>
+												<span class="clearfix"></span>
+												<span class="text-muted fs-13 ml-auto">{{$notify->created_at->diffForHumans()}}<i class="mdi mdi-clock text-muted mr-1"></i></span>
+											</div>
+											<div class="ml-auto">
+												<a href="{{route('admin.notify.show',$notify->id)}}" class="mr-0 option-dots" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+													<span class="feather feather-more-horizontal"></span>
+												</a>
+												{{-- <ul class="dropdown-menu dropdown-menu-left" role="menu">
+													<li><a href="#"><i class="feather feather-eye ml-2"></i>View</a></li>
+													<li><a href="#"><i class="feather feather-plus-circle ml-2"></i>Add</a></li>
+													<li><a href="#"><i class="feather feather-trash-2 ml-2"></i>Remove</a></li>
+													<li><a href="#"><i class="feather feather-settings ml-2"></i>More</a></li>
+												</ul> --}}
+											</div>
+										</div>
+									</div>
+									<hr>
+									@endif
+								@endforeach
+							</div>
+						</div>

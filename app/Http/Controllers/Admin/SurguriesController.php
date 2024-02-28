@@ -66,6 +66,7 @@ class SurguriesController extends Controller
             'surgeried_at' => $request->surgeried_at,
             'released_at' => $request->released_at,
         ]);
+        
         $attachOperations = [];
         foreach ($request->input('operations') as $operationId) {
             $operation = Operation::find($operationId);

@@ -34,34 +34,10 @@
                     </div>
                 </div>
             <div class="card-footer text-right mt-1">
+                <a href="{{route('admin.invoice.index')}}" class="btn btn-gray btn-lg">ریست</a>
                 <button class="btn btn-info btn-lg" >جستوجو</button>
-                <a href="{{route('admin.payments.index')}}" class="btn btn-gray btn-lg">ریست</a>
             </div>
             </form>
         </div>
     </div>
 </div>
-@section('scripts')
-<script>
-    $('#payment_date_show').MdPersianDateTimePicker({
-        targetDateSelector: '#payment_date',
-        targetTextSelector: '#payment_date_show',
-        englishNumber: false,
-        toDate:true,
-        enableTimePicker: false,
-        dateFormat: 'yyyy-MM-dd',
-        textFormat: 'yyyy-MM-dd',
-        groupId: 'rangeSelector1',
-    });
-    $('#payment_date_show2').MdPersianDateTimePicker({
-        targetDateSelector: '#payment_date2',
-        targetTextSelector: '#payment_date_show2',
-        englishNumber: false,
-        toDate:true,
-        enableTimePicker: false,
-        dateFormat: 'yyyy-MM-dd',
-        textFormat: 'yyyy-MM-dd',
-        groupId: 'rangeSelector1',
-    });
-        </script>
-@endsection
